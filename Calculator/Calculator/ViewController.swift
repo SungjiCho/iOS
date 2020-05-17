@@ -11,25 +11,35 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     
-    var currentlyInMiddleOfTyping = false
+    var userIsInTheMiddleOfTyping = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-    @IBAction func touchedDigit(_ sender: UIButton) {
+    @IBAction func touchDigit(_ sender: UIButton) {
         
         let digit = sender.currentTitle!
         
-        if currentlyInMiddleOfTyping{
-            display.text = display.text! + digit
+        if userIsInTheMiddleOfTyping{
+            let textCurrentlyInDisplay = display.text!
+            display.text = textCurrentlyInDisplay + digit
         }else {
             display.text = digit
         }
         
-        currentlyInMiddleOfTyping = true
+        userIsInTheMiddleOfTyping = true
     }
     
+    @IBAction func performOperation(_ sender: UIButton) {
+        
+        if let mathmaticalSymbol = sender.currentTitle{
+            if mathmaticalSymbol == "π"{
+                display.text = String(Double.pi)
+            }
+        }
+        userIsInTheMiddleOfTyping = false
+    }
 }
 
